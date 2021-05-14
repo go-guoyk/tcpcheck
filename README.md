@@ -21,3 +21,7 @@ SERVER: <10m bytes>
 ```
 
 Server will close the connection after `T10M` action
+
+## 许可证
+
+Guo Y.K., MIT License
