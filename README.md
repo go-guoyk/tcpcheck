@@ -17,7 +17,7 @@ SERVER: OK
 
 ```text
 CLIENT: T10M
-SERVER: <10m bytes>
+SERVER: <1000000 bytes>
 ```
 
 Server will close the connection after `T10M` action
