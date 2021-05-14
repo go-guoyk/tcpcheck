@@ -10,6 +10,7 @@ import (
 	"log"
 	"math/rand"
 	"net"
+	"net/http"
 	"os"
 	"time"
 )
@@ -101,8 +102,20 @@ func serverRoutine(conn *net.TCPConn) {
 }
 
 func clientSubmitRecord(record Record) {
-	data, _ := json.MarshalIndent(record, "", "  ")
-	log.Printf("%s", data)
+	go func() {
+		var err error
+		var data []byte
+		if data, err = json.Marshal(record); err != nil {
+			log.Println("failed to marshal report:", err.Error())
+			return
+		}
+		var resp *http.Response
+		if resp, err = http.Post(optReport, "application/json", bytes.NewReader(data)); err != nil {
+			log.Println("failed to post report:", err.Error())
+			return
+		}
+		defer resp.Body.Close()
+	}()
 }
 
 func clientRoutineLong() {
