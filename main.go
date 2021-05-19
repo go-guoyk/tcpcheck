@@ -102,6 +102,7 @@ func serverRoutine(conn *net.TCPConn) {
 }
 
 func clientSubmitRecord(record Record) {
+	log.Println(record)
 	go func() {
 		var err error
 		var data []byte
